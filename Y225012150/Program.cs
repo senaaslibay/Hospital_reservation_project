@@ -5,14 +5,14 @@ using Y225012150.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = "Offline=False;Server=127.0.0.1;Port=5432;Database=aspnet-Y225012150-5daa6a2b-e09d-4347-bb89-fcf0357a0a1d;User=postgres;Password=pass;Trusted_Connection=True;MultipleActiveResultSets=true;providerName=\"System.Data.CData.PostgreSQL\"";//builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = "Offline=False;Server=127.0.0.1;Port=5432;Database=aspnet-Y225012150-5daa6a2b-e09d-4347-bb89-fcf0357a0a1d;User=postgres;Password=pass;Trusted_Connection=True;MultipleActiveResultSets=true;providerName=\"System.Data.CData.PostgreSQL\"";//builder.Configuration.GetConnectionString("DefaultConnection")?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddIdentity<UserDetails, IdentityRole>()
+builder.Services.AddIdentity<Y225012150.Models.UserDetails, IdentityRole>()
     .AddDefaultTokenProviders()
     .AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
