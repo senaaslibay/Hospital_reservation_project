@@ -55,8 +55,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(locOptions.Value);
+//var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+//app.UseRequestLocalization(locOptions.Value);
 
 app.UseAuthentication();
 app.UseAuthorization();
