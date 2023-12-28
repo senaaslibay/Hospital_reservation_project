@@ -10,5 +10,6 @@ namespace Y225012150.Data
             : base(options)
         {
         }
+        public DbSet<Y225012150.Models.Randevu>? Randevu { get; set; }
     }
 }

@@ -1,0 +1,63 @@
+﻿@model Y225012150.Models.Randevu
+
+@{
+    ViewData["Title"] = "RandevuSec";
+}
+
+<h1>RandevuSec</h1>
+
+<h4>Randevu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RandevuSec">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RandevuIl" class="control-label"></label>
+                <input asp-for="RandevuIl" class="form-control" />
+                <span asp-validation-for="RandevuIl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandevuIlce" class="control-label"></label>
+                <input asp-for="RandevuIlce" class="form-control" />
+                <span asp-validation-for="RandevuIlce" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandevuKlinik" class="control-label"></label>
+                <input asp-for="RandevuKlinik" class="form-control" />
+                <span asp-validation-for="RandevuKlinik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandevuHastane" class="control-label"></label>
+                <input asp-for="RandevuHastane" class="form-control" />
+                <span asp-validation-for="RandevuHastane" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandevuMuayeneYeri" class="control-label"></label>
+                <input asp-for="RandevuMuayeneYeri" class="form-control" />
+                <span asp-validation-for="RandevuMuayeneYeri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandevuHekim" class="control-label"></label>
+                <input asp-for="RandevuHekim" class="form-control" />
+                <span asp-validation-for="RandevuHekim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RandevuTarih" class="control-label"></label>
+                <input asp-for="RandevuTarih" class="form-control" />
+                <span asp-validation-for="RandevuTarih" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

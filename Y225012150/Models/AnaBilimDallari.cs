@@ -2,5 +2,8 @@
 {
     public class AnaBilimDallari
     {
+        public int AbdID { get; set; }
+        public string AbdAdi { get; set; }
+        public string Abd { get; set; }
     }
 }
