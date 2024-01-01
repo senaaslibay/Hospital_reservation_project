@@ -28,5 +28,8 @@ namespace Y225012150.Models
         [Required]
         [Display(Name = "Tarih")]
         public DateTime RandevuTarih { get; set; }
+
+        public UserDetails User { get; set; }
+        public int UserID { get; set; }
     }
 }

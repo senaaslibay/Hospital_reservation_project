@@ -12,8 +12,8 @@ using Y225012150.Data;
 namespace Y225012150.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231224000642_first")]
-    partial class first
+    [Migration("20240101155928_roluseratama")]
+    partial class roluseratama
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,6 +157,163 @@ namespace Y225012150.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Y225012150.Models.Hastane", b =>
+                {
+                    b.Property<int>("HastaneID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("HastaneID"));
+
+                    b.Property<string>("HastaneAdi")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("HastaneID");
+
+                    b.ToTable("Hastane");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Il", b =>
+                {
+                    b.Property<int>("IlID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IlID"));
+
+                    b.Property<string>("IlAdi")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IlID");
+
+                    b.ToTable("Il");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Ilce", b =>
+                {
+                    b.Property<int>("IlceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IlceID"));
+
+                    b.Property<int>("IlID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("IlceAdi")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IlceID");
+
+                    b.HasIndex("IlID");
+
+                    b.ToTable("Ilce");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Klinik", b =>
+                {
+                    b.Property<int>("KlinikID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("KlinikID"));
+
+                    b.Property<int>("IlceID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("KlinikAdi")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("KlinikID");
+
+                    b.HasIndex("IlceID");
+
+                    b.ToTable("Klinik");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.MuayeneYeri", b =>
+                {
+                    b.Property<int>("MuayeneYeriID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MuayeneYeriID"));
+
+                    b.Property<string>("MuayeneYeriAdi")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("MuayeneYeriID");
+
+                    b.ToTable("MuayeneYeri");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Randevu", b =>
+                {
+                    b.Property<int>("RandevuId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RandevuId"));
+
+                    b.Property<string>("RandevuHastane")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RandevuHekim")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RandevuIl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RandevuIlce")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RandevuKlinik")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RandevuMuayeneYeri")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RandevuTarih")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("RandevuId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Randevu");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Roller", b =>
+                {
+                    b.Property<int>("RollerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RollerID"));
+
+                    b.Property<string>("RoleAdi")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("RollerID");
+
+                    b.ToTable("Roller");
+                });
+
             modelBuilder.Entity("Y225012150.Models.UserDetails", b =>
                 {
                     b.Property<string>("Id")
@@ -213,6 +370,9 @@ namespace Y225012150.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
+                    b.Property<int>("UserRollerRollerID")
+                        .HasColumnType("integer");
+
                     b.Property<string>("UserSoyad")
                         .IsRequired()
                         .HasColumnType("text");
@@ -225,6 +385,8 @@ namespace Y225012150.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("UserRollerRollerID");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -278,6 +440,68 @@ namespace Y225012150.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Ilce", b =>
+                {
+                    b.HasOne("Y225012150.Models.Il", "Il")
+                        .WithMany("Ilceler")
+                        .HasForeignKey("IlID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Il");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Klinik", b =>
+                {
+                    b.HasOne("Y225012150.Models.Ilce", "Ilce")
+                        .WithMany("Klinikler")
+                        .HasForeignKey("IlceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ilce");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Randevu", b =>
+                {
+                    b.HasOne("Y225012150.Models.UserDetails", "User")
+                        .WithMany("Randevular")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.UserDetails", b =>
+                {
+                    b.HasOne("Y225012150.Models.Roller", "UserRoller")
+                        .WithMany("UserDetails")
+                        .HasForeignKey("UserRollerRollerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserRoller");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Il", b =>
+                {
+                    b.Navigation("Ilceler");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Ilce", b =>
+                {
+                    b.Navigation("Klinikler");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.Roller", b =>
+                {
+                    b.Navigation("UserDetails");
+                });
+
+            modelBuilder.Entity("Y225012150.Models.UserDetails", b =>
+                {
+                    b.Navigation("Randevular");
                 });
 #pragma warning restore 612, 618
         }

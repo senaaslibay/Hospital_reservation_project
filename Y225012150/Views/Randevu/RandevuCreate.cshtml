@@ -1,7 +1,7 @@
 ﻿@model Y225012150.Models.Randevu
 
 @{
-    ViewData["Title"] = "RandevuSec";
+    ViewData["Title"] = "RandevuCreate";
 }
 
 <h1>RandevuSec</h1>
@@ -12,6 +12,8 @@
     <div class="col-md-4">
         <form asp-action="RandevuSec">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <select asp-for="RandevuIl" class="form-control" asp-items="@ViewBag.bpCategories">
+            </select>
             <div class="form-group">
                 <label asp-for="RandevuIl" class="control-label"></label>
                 <input asp-for="RandevuIl" class="form-control" />

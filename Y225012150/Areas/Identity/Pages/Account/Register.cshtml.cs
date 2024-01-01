@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Y225012150.Areas.Identity.Pages.Account
 {
@@ -30,6 +31,8 @@ namespace Y225012150.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<UserDetails> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private HastaneRandevuContext _context = new HastaneRandevuContext();
+
 
         public RegisterModel(
             UserManager<UserDetails> userManager,
@@ -79,6 +82,8 @@ namespace Y225012150.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Soyad")]
             public string UserSoyad { get; set; }
+
+           
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -124,6 +129,7 @@ namespace Y225012150.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.UserAd = Input.UserAd;
                 user.UserSoyad = Input.UserSoyad;
+                user.Roller = new Roller() { RoleAdi = "Hasta" };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

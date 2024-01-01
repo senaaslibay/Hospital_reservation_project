@@ -1,0 +1,56 @@
+﻿@model List<UserDetails>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kullanıcı Adı
+            </th>
+            <th>
+                Kullanıcı Soyadı
+            </th>
+            <th>
+                Kullanıcı Rol
+            </th>
+            <th>
+               Action
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserAd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserSoyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RollerID)
+                </td>
+                <td>
+                    @* <a asp-action="AssignUserToRole" asp-route-id="@item.UserAd" >Doktor Rolü Ata</a> *@
+                    <form asp-controller="Role" asp-action="AssignUserToRole" method="post">
+                        <input type="hidden" name="userID" value=@item.Id />
+                        <input type="hidden" name="role" value="Doktor" />
+                        <button type="submit">Doktor Rolü Ata</button>
+                    </form>
+                    <form asp-controller="Role" asp-action="AssignUserToRole" method="post">
+                        <input type="hidden" name="userID" value=@item.Id />
+                        <input type="hidden" name="role" value="Admin" />
+                        <button type="submit">Admin Rolü Ata</button>
+                    </form>
+                    <form asp-controller="Role" asp-action="AssignUserToRole" method="post">
+                        <input type="hidden" name="userID" value=@item.Id />
+                        <input type="hidden" name="role" value="Hasta" />
+                        <button type="submit">Hasta Rolü Ata</button>
+                    </form>
+                    @* @Html.ActionLink("Doktor Rolü Ata", "AssignUserToRole", new { /* userId=item.PrimaryKey roleName="Doktor" */ }) *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
